@@ -5,11 +5,11 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from models.place import Place
-from models.review import Review
+from models.review import review
 
 
 class User(BaseModel, Base):
-    """MySQL database user. Inherits from SQLAlchemy Base and links
+    """MySQL database user. Inherits from SQLAlchemy Base and links to
     MySQL table users.
       Attributes:
       __tablename__ (str): The name of the MySQL table to store users.
@@ -20,12 +20,12 @@ class User(BaseModel, Base):
       places (sqlalchemy relationship): The User-Place relationship.
       reviews (sqlalchemy relationship): The User-Review relationship.
     """
-        __tablename__ = 'users'
-        email = Column(String(128), nullable=False)
-        password = Column(String(128), nullable=False)
-        first_name = Column(String(128))
-        last_name = Column(String(128))
-        places = relationship("Place", cascade='all, delete, delete-orphan',
-                              backref="user")
-        reviews = relationship("Review", cascade='all, delete, delete-orphan',
-                               backref="user")
+    __tablename__ = 'users'
+    email = Column(String(128), nullable=False)
+    password = Column(String(128), nullable=False)
+    first_name = Column(String(128))
+    last_name = Column(String(128))
+    places = relationship("Place", cascade='all, delete, delete-orphan',
+                          backref="user")
+    reviews = relationship("Review", cascade='all, delete, delete-rphan',
+                           backref="user")
