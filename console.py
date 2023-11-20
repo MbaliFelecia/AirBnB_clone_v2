@@ -115,33 +115,29 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    def do_create(self, line):
-        """Creates a new instance of BaseModel, saves it
-        Exceptions:
-            SyntaxError: when there is no args given
-            NameError: when there is no object taht has the name
-        """
-        try:
-            if not line:
-                raise SyntaxError()
-            my_list = line.split(" ")
-            obj = eval("{}()".format(my_list[0]))
-            print("{}".format(obj.id))
-            for num in range(1, len(my_list)):
-                my_list[num] = my_list[num].replace('=', ' ')
-                attributes = split(my_list[num])
-                attributes[1] = attributes[1].replace('_', ' ')
-                try:
-                    var = eval(attributes[1])
-                    attributes[1] = var
-                    pass
-                if type(attributes[1]) is not tuple:
-                    setattr(obj, attributes[0], attributes[1])
-            obj.save()
-        except SyntaxError:
+    def do_create(self, args):
+        """ Create an object of any class"""
+        if len(args) == 0:
             print("** class name missing **")
-        except NameError:
-            print("** class doesn't exist **")
+            return
+        # try:
+        args = shlex.split(args)
+        new_instance = eval(args[0])()
+        for i in args[1:]:
+            try:
+                key = i.split("=")[0]
+                value = i.split("=")[1]
+                if hasattr(new_instance, key) is True:
+                    value = value.replace("_", " ")
+                    try:
+                        value = eval(value)
+                    except Exception:
+                        pass
+                    setattr(new_instance, key, value)
+            except (ValueError, IndexError):
+                pass
+        new_instance.save()
+        print(new_instance.id)
 
     def help_create(self):
         """ Help information for the create method """
