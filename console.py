@@ -3,7 +3,7 @@
 import cmd
 import sys
 from datetime import datetime
-import shlex
+import shlex import spilt
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
