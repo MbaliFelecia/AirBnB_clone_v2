@@ -3,7 +3,7 @@
 import cmd
 import sys
 from datetime import datetime
-import shlex import spilt
+import shlex
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    """def do_create(self, args):
+    '''def do_create(self, args):
         """ Create an object of any class"""
         if len(args) == 0:
             print("** class name missing **")
@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
             except (ValueError, IndexError):
                 pass
         new_instance.save()
-        print(new_instance.id)"""
+        print(new_instance.id)'''
 
     def do_create(self, line):
         """ Creates a new instance of BaseMole, save if
@@ -160,7 +160,7 @@ class HBNBCommand(cmd.Cmd):
                     attributes[1] = var
                 except:
                     pass
-                if type(attributes[1] is not tuple:
+                if type(attributes[1]) is not tuple:
                     setattr(obj, attributes[0], attributes[1])
             obj.save()
         except SyntaxError:
