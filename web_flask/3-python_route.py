@@ -32,7 +32,7 @@ def c_is_fun(text):
 def python_with_text(text='is cool'):
     """Reformat text based on optional variable
     """
-    return 'python' + text.replace('_', ' ')
+    return 'Python' + text.replace('_', ' ')
 
 
 if __name__ == '__main__':
